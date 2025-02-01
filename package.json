@@ -2,8 +2,8 @@
   "name": "app",
   "private": true,
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
-    "build:watch": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --watch"
+    "build": "esbuild app/javascript/application.js --bundle --sourcemap --outdir=app/assets/builds --loader:.js=jsx --loader:.jsx=jsx --loader:.css=css",
+    "build:watch": "esbuild app/javascript/application.js --bundle --sourcemap --outdir=app/assets/builds --watch --loader:.js=jsx --loader:.jsx=jsx --loader:.css=css"
   },
   "devDependencies": {
     "esbuild": "^0.24.2"

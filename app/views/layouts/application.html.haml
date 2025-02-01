@@ -6,8 +6,10 @@
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
-    = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
+    = stylesheet_link_tag "/assets/application.css", "data-turbo-track": "reload", rel: "stylesheet"
+    = javascript_include_tag "/assets/application.js", "data-turbo-track": "reload", type: "module"
+
+
   %body
     = yield
     :javascript

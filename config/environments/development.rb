@@ -73,4 +73,11 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  config.public_file_server.enabled = true
+  # config.public_file_server.index_name = "index.html"
+
+  # Add `app/assets/builds` to asset paths
+
+  # Ensure esbuild outputs are precompiled and available
 end
