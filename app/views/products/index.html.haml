@@ -1,0 +1,13 @@
+%h1 Product List
+
+%nav
+  %ul
+    %li
+      = link_to "Upload New Products", new_product_path
+
+%pre
+  Rails react_component helper output:
+  = react_component("ProductList")
+
+:javascript
+  console.log("✅ Rails View Rendered: React should be loading now...");

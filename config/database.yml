@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: <%= ENV['DATABASE_USERNAME'] || 'postgres' %>
+  password: <%= ENV['DATABASE_PASSWORD'] || 'password' %>
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
+
+development:
+  <<: *default
+  database: ecom_checkout_development
+
+test:
+  <<: *default
+  database: ecom_checkout_test
+
+production:
+  <<: *default
+  database: ecom_checkout_production
+  username: <%= ENV['DATABASE_USERNAME'] || 'postgres' %>
+  password: <%= ENV['DATABASE_PASSWORD'] || 'password' %>
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
