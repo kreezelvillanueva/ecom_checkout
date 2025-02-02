@@ -1,6 +1,0 @@
-= form_with url: products_path, multipart: true, local: true do |f|
-  %div
-    %label Select a JSON file:
-    = f.file_field :file
-  %br
-  = f.submit "Upload", class: "btn btn-primary"

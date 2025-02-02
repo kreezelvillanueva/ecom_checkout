@@ -10,13 +10,13 @@ setup: ## Setup  `web` environment and database
 	@docker-compose run --rm web bundle exec rails db:create
 	@echo "database created!"
 
-migrate: ## Run    `web` database migrations
+migrate: ## Run `web` database migrations
 	@docker-compose run --rm web bundle exec rails db:migrate
 
-rollback:
+rollback: ## Rollback latest migration
 	@docker-compose run --rm web bundle exec rails db:rollback
 
-migrate-status:
+migrate-status: ## Show migration status
 	@docker-compose run --rm web bundle exec rails db:migrate:status
 
 seed: ## Seed `web` database data
@@ -28,26 +28,25 @@ seed: ## Seed `web` database data
 		docker-compose run --rm web bundle exec rails db:seed:$(FILENAME); \
 	fi
 
-
-build: ## Build  `web` application container
+build: ## Build `web` application container
 	@docker-compose build
 
-start: ## Start  `web` application container
+start: ## Start `web` application container
 	@docker-compose up -d
 
-stop: ## Stop   `web` application container
+stop: ## Stop `web` application container
 	@docker-compose stop
 
 delete: ## Delete `web` application container
 	@docker-compose down
 
-status: ## Show   `web` application containers status
+status: ## Show `web` application container status
 	@docker-compose ps
 
-logs: ## Show   `web` application container logs
+logs: ## Show `web` application container logs
 	@docker-compose logs -f web
 
-console: ## Show   `web` application container bundle exec rails console
+console: ## Open Rails console inside container
 	@docker-compose run --rm web bundle exec rails console
 
 rebuild: ## Rebuild `web` Stop, Build, Start application
@@ -55,9 +54,13 @@ rebuild: ## Rebuild `web` Stop, Build, Start application
 	@docker-compose build
 	@docker-compose up -d
 
-restart: ## Restart web and posgresql
+restart: ## Restart web and postgresql
 	@docker-compose down
 	@docker-compose up -d
 
-bundle-install:
+bundle-install: ## Install gem dependencies
 	@docker-compose run --rm web bundle install
+
+yarn-build:
+	@docker-compose exec web rm -rf app/assets/builds/*
+	@docker-compose exec web yarn build
