@@ -74,7 +74,7 @@ Ensure you have the following installed:
 5. **Access the application**
 
    - **Frontend:** `http://localhost:3000`
-   - **API Endpoints:** `http://localhost:3000/products.json` & `http://localhost:3000/cart.json`
+   - **API Endpoints:** `http://localhost:3000/products.json` & `http://localhost:3000/carts.json`
 
 6. **Stop the application**
 
@@ -138,28 +138,16 @@ make test-js
 
 ## 🚀 Future Improvements
 
-- Implement user authentication (Devise + JWT)
+- Implement user authentication (Devise)
 - Add checkout functionality
 - Store past orders
 - Improve UI styling with TailwindCSS or Bootstrap
 
 ---
 
-## 📜 License
-
-This project is licensed under the MIT License.
-
----
-
-## 🤝 Contributions
-
-Contributions are welcome! Please open an issue or create a pull request with improvements.
-
----
-
 ## 📝 Authors
 
-- **Your Name** - [GitHub Profile](https://github.com/your-username)
+- **Kreezel Villanueva**
 
 ---
 
