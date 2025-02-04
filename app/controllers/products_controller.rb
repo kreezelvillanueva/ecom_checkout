@@ -1,5 +1,12 @@
 class ProductsController < ApplicationController
-  skip_forgery_protection only: [:create]  # ✅ Since React sends JSON
+
+  def index
+    @products = Product.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @products }
+    end
+  end
 
   def create
     if params[:file].present?
@@ -15,13 +22,6 @@ class ProductsController < ApplicationController
       render json: { message: "Products uploaded successfully!" }, status: :ok  # ✅ Return JSON
     else
       render json: { error: "No file provided" }, status: :unprocessable_entity
-    end
-  end
-
-  def index
-    @products = Product.all
-    respond_to do |format|
-      format.json { render json: @products } # API response
     end
   end
 end

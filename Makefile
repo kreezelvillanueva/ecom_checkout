@@ -12,21 +12,13 @@ setup: ## Setup  `web` environment and database
 
 migrate: ## Run `web` database migrations
 	@docker-compose run --rm web bundle exec rails db:migrate
+	@docker-compose exec -e RAILS_ENV=test web bin/rails db:migrate
 
 rollback: ## Rollback latest migration
 	@docker-compose run --rm web bundle exec rails db:rollback
 
 migrate-status: ## Show migration status
 	@docker-compose run --rm web bundle exec rails db:migrate:status
-
-seed: ## Seed `web` database data
-	@if [ -z "$(FILENAME)" ]; then \
-		echo "Running all seeds..."; \
-		docker-compose run --rm web bundle exec rails db:seed; \
-	else \
-		echo "Running seed: $(FILENAME)"; \
-		docker-compose run --rm web bundle exec rails db:seed:$(FILENAME); \
-	fi
 
 build: ## Build `web` application container
 	@docker-compose build
@@ -59,8 +51,11 @@ restart: ## Restart web and postgresql
 	@docker-compose up -d
 
 bundle-install: ## Install gem dependencies
-	@docker-compose run --rm web bundle install
+	@docker-compose exec web bundle install
 
 yarn-build:
 	@docker-compose exec web rm -rf app/assets/builds/*
 	@docker-compose exec web yarn build
+
+test:
+	docker-compose exec -e RAILS_ENV=test web bundle exec rspec

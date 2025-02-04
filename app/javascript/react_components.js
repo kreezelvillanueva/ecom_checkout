@@ -1,6 +1,6 @@
 const ReactRailsUJS = require("react_ujs");
 
-import ProductsIndex from "./components/products/ProductsIndex";
+import ProductsIndex from "./components/ProductsIndex";
 
 const components = {
   ProductsIndex

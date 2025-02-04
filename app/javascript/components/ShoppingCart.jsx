@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const ShoppingCart = ({ cart,  removeFromCart }) => {
-  console.log("✅ Shopping Cart Loaded:", cart);
+  console.log("Shopping Cart Loaded:", cart);
 
-  // ✅ Compute Total Price
+  // Compute Total Price
   const total = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
-  // ✅ Calculate Discount Based on Total
+  // Calculate Discount Based on Total
   let discount = 0;
   if (total > 100) discount = 0.2; // 20% off
   else if (total > 50) discount = 0.15; // 15% off
@@ -39,7 +39,7 @@ const ShoppingCart = ({ cart,  removeFromCart }) => {
                 <td style={{ textAlign: "right" }}>{item.quantity}</td>
                 <td style={{ textAlign: "right" }}>${(item.product.price * item.quantity).toFixed(2)}</td>
                 <td>
-                  <button class="btn btn-danger" href="#">
+                  <button className="btn btn-danger" href="#">
                     <span onClick={() => removeFromCart(item.id)}>
                       Remove
                     </span>
@@ -47,7 +47,6 @@ const ShoppingCart = ({ cart,  removeFromCart }) => {
                 </td>
               </tr>
             ))}
-            {/* 🛠 Horizontal Rule (Empty row with border to act as a separator) */}
             <tr>
               <td colSpan="4">
                 <hr></hr>
@@ -80,7 +79,6 @@ const ShoppingCart = ({ cart,  removeFromCart }) => {
   );
 };
 
-// ✅ Prop Types Validation
 ShoppingCart.propTypes = {
   cart: PropTypes.array.isRequired,
   removeFromCart: PropTypes.func.isRequired,

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-console.log("✅ React ProductList Component is Mounted!");
+console.log("React ProductList Component is Mounted!");
 
 const ProductList = ({ products, addToCart }) => {
   return (
@@ -42,7 +42,6 @@ const ProductList = ({ products, addToCart }) => {
   );
 };
 
-// ✅ Prop Validation to catch potential issues
 ProductList.propTypes = {
   products: PropTypes.array.isRequired,
   addToCart: PropTypes.func.isRequired,

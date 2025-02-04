@@ -3,35 +3,35 @@ import ProductList from "./ProductList";
 import ShoppingCart from "./ShoppingCart";
 import ProductUpload from "./ProductUpload";
 
-console.log("✅ React ProductsIndex Component is Mounted!");
+console.log("React ProductsIndex Component is Mounted!");
 
 const ProductsIndex = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
 
-  // ✅ Fetch products function
+  //  Fetch products function
   const fetchProducts = () => {
     fetch("/products.json")
       .then(response => response.json())
       .then(data => {
-        console.log("✅ Loaded Products:", data);
+        console.log(" Loaded Products:", data);
         setProducts(data);
       })
       .catch(error => console.error("❌ Error loading products:", error));
   };
 
-  // ✅ Fetch cart function
+  //  Fetch cart function
   const fetchCart = () => {
     fetch("/carts.json")
       .then(response => response.json())
       .then(data => {
-        console.log("✅ Loaded Cart:", data);
+        console.log(" Loaded Cart:", data);
         setCart(data);
       })
       .catch(error => console.error("❌ Error loading cart:", error));
   };
 
-  // ✅ Ensure both cart & products load on first render
+  //  Ensure both cart & products load on first render
   useEffect(() => {
     fetchProducts();
     fetchCart();
@@ -41,7 +41,7 @@ const ProductsIndex = () => {
     return document.querySelector('meta[name="csrf-token"]').getAttribute("content");
   };
 
-  // ✅ Function to add product to cart
+  //  Function to add product to cart
   const addToCart = (product) => {
     fetch(`/carts/${product.uuid}`, {
       method: "PATCH",
@@ -49,7 +49,7 @@ const ProductsIndex = () => {
         "Content-Type": "application/json",
         "X-CSRF-Token": getCSRFToken(),
       },
-      body: JSON.stringify({ product_id: product.uuid }), // ✅ Use UUID
+      body: JSON.stringify({ product_id: product.uuid }), //  Use UUID
     })
       .then(response => {
         if (!response.ok) {
@@ -60,18 +60,15 @@ const ProductsIndex = () => {
         return response.json();
       })
       .then(updatedCartItems => {
-        console.log("✅ Cart Updated:", updatedCartItems);
+        console.log(" Cart Updated:", updatedCartItems);
 
-        // ✅ Correctly Merge updated cart items
         setCart(prevCart => {
           const cartMap = new Map();
 
-          // Add existing cart items
           prevCart.forEach(item => {
             cartMap.set(item.product.uuid, { ...item });
           });
 
-          // Add or update new cart items from server response
           updatedCartItems.forEach(item => {
             if (cartMap.has(item.product.uuid)) {
               cartMap.get(item.product.uuid).quantity = item.quantity;
@@ -100,10 +97,10 @@ const ProductsIndex = () => {
       return response.json();
     })
     .then(() => {
-      console.log("✅ Item Deleted. Fetching updated cart...");
-      fetchCart();  // ✅ Refresh cart state after deletion
+      console.log(" Item Deleted. Fetching updated cart...");
+      fetchCart();
     })
-    .catch(error => console.error("❌ Error removing item from cart:", error));
+    .catch(error => console.error("Error removing item from cart:", error));
   };
   
 

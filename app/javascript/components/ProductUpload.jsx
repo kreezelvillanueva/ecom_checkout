@@ -13,7 +13,7 @@ const ProductUpload = ({ onUploadSuccess }) => {
 
   const handleUpload = async () => {
     if (!selectedFile) {
-      alert("⚠️ Please select a file.");
+      alert("Please select a file.");
       return;
     }
 
@@ -24,20 +24,19 @@ const ProductUpload = ({ onUploadSuccess }) => {
       const response = await fetch("/products", {
         method: "POST",
         headers: {
-          "X-CSRF-Token": getCSRFToken(), // ✅ Include CSRF token for Rails security
+          "X-CSRF-Token": getCSRFToken(),
         },
         body: formData,
       });
 
       if (!response.ok) throw new Error("Upload failed!");
 
-      alert("✅ File successfully uploaded!");
+      alert("File successfully uploaded!");
 
-      // ✅ Refresh Product List
       onUploadSuccess();
     } catch (error) {
-      console.error("❌ Upload error:", error);
-      alert("❌ Upload failed. Please try again.");
+      console.error("Upload error:", error);
+      alert("Upload failed. Please try again.");
     }
   };
 
