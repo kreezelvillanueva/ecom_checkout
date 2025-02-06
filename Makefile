@@ -7,8 +7,11 @@ help: ## Show help topics
 
 setup: ## Setup  `web` environment and database
 	@docker-compose build
-	@docker-compose run --rm web bundle exec rails db:create
-	@echo "database created!"
+	@docker-compose up -d
+	@docker-compose exec web bundle install
+	@docker-compose exec web bin/rails db:setup
+	@docker-compose exec web yes | yarn install
+	@docker-compose exec web yes | yarn build 
 
 migrate: ## Run `web` database migrations
 	@docker-compose run --rm web bundle exec rails db:migrate
@@ -25,6 +28,7 @@ build: ## Build `web` application container
 
 start: ## Start `web` application container
 	@docker-compose up -d
+	@docker-compose exec web yes | yarn build 
 
 stop: ## Stop `web` application container
 	@docker-compose stop
@@ -45,6 +49,7 @@ rebuild: ## Rebuild `web` Stop, Build, Start application
 	@docker-compose stop
 	@docker-compose build
 	@docker-compose up -d
+	@docker-compose exec web yes | yarn build 
 
 restart: ## Restart web and postgresql
 	@docker-compose down
@@ -55,7 +60,10 @@ bundle-install: ## Install gem dependencies
 
 yarn-build:
 	@docker-compose exec web rm -rf app/assets/builds/*
-	@docker-compose exec web yarn build
+	@docker-compose exec web yes | yarn build 
 
 test:
-	docker-compose exec -e RAILS_ENV=test web bundle exec rspec
+	@docker-compose exec -e RAILS_ENV=test web bundle exec rspec
+
+rubocop:
+	@docker-compose exec web bundle exec rubocop

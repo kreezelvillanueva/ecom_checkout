@@ -11,7 +11,7 @@ Ecom Checkout is a **Marketplace Checkout System** built with **Ruby on Rails 7*
 - **Database:** PostgreSQL
 - **Package Manager:** Yarn
 - **Build Tool:** ESBuild
-- **Testing:** RSpec (Rails) & Jest (React)
+- **Testing:** RSpec (Rails)
 - **Containerization:** Docker & Docker Compose
 
 ---
@@ -46,7 +46,7 @@ Ensure you have the following installed:
 1. **Clone the repository**
 
    ```sh
-   git clone https://github.com/your-username/ecom_checkout.git
+   git clone https://github.com/kreezelvillanueva/ecom_checkout.git
    cd ecom_checkout
    ```
 
@@ -54,7 +54,6 @@ Ensure you have the following installed:
 
    ```sh
    make setup
-   make start
    ```
 
    This will build the app, install dependencies, create the database, and run the server.
@@ -65,18 +64,12 @@ Ensure you have the following installed:
    make migrate
    ```
 
-4. **Seed sample data (Optional)**
-
-   ```sh
-   make seed
-   ```
-
-5. **Access the application**
+4. **Access the application**
 
    - **Frontend:** `http://localhost:3000`
    - **API Endpoints:** `http://localhost:3000/products.json` & `http://localhost:3000/carts.json`
 
-6. **Stop the application**
+5. **Stop the application**
 
    ```sh
    make stop
@@ -88,8 +81,8 @@ Ensure you have the following installed:
 
 ### 1️⃣ Upload Products
 
-- Navigate to `Upload Products`
-- Select a **products.json** file and upload
+- Click Choose file button and upload a **products.json** file.
+- Once file is selected click "Upload" button to start.
 
 Example JSON format:
 
@@ -111,7 +104,7 @@ Example JSON format:
 
 ### 4️⃣ View Shopping Cart
 
-- Displays the list of added items, unit prices, total costs, and discounts.
+- Displays the list of added items, unit prices, quantity, total costs, and discounts.
 - Users can remove items from the cart.
 
 ### 5️⃣ Apply Discounts Automatically
@@ -122,34 +115,17 @@ Example JSON format:
 
 ## ✅ Testing
 
-### 🔹 Run RSpec Tests (Rails API)
+### 🔹 Run RSpec Tests (Rails)
 
 ```sh
 make test
 ```
 
-### 🔹 Run Jest Tests (React Components)
-
-```sh
-make test-js
-```
-
 ---
 
-## 🚀 Future Improvements
-
-- Implement user authentication (Devise)
-- Add checkout functionality
-- Store past orders
-- Improve UI styling with TailwindCSS or Bootstrap
-
----
-
-## 📝 Authors
+## 📝 Author
 
 - **Kreezel Villanueva**
 
 ---
-
-🎉 **Happy Coding!** 🎉
 
