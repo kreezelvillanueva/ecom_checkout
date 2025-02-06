@@ -1,5 +1,8 @@
-require 'json'
+# frozen_string_literal: true
 
+require "json"
+
+# This class is responsible for loading products from a JSON file
 class ProductLoader
   def self.load_products_from_file(file)
     return [] unless file.respond_to?(:read)

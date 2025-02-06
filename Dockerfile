@@ -49,6 +49,8 @@ COPY . .
 
 # Set user for security
 RUN useradd -m rails && chown -R rails:rails /app
+RUN chown -R rails:rails /usr/local/bundle
+
 USER rails
 
 # Expose port for Rails server

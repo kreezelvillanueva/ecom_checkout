@@ -1,5 +1,7 @@
-class CartsController < ApplicationController
+# frozen_string_literal: true
 
+# This is the controller for the carts
+class CartsController < ApplicationController
   def index
     cart = Cart.find_or_create_by(user_id: session[:user_id] || 1)
     render_cart_items(cart)
@@ -16,9 +18,12 @@ class CartsController < ApplicationController
     cart_item = cart.cart_items.find_or_initialize_by(product: product)
     cart_item.quantity = cart_item.new_record? ? 1 : cart_item.quantity + 1
     cart_item.unit_price = product.price
-    cart_item.save!
 
-    render_cart_items(cart)
+    if cart_item.save
+      render_cart_items(cart)
+    else
+      render json: { error: "Failed to add item" }, status: :unprocessable_entity
+    end
   rescue StandardError => e
     render json: { error: e.message }, status: :unprocessable_entity
   end
@@ -29,15 +34,16 @@ class CartsController < ApplicationController
 
     if cart_item
       cart_item.destroy
+      render_cart_items(cart)
+    else
+      render json: { error: "Item not found" }, status: :not_found
     end
-
-    render_cart_items(cart)
   end
 
   private
 
   def render_cart_items(cart)
-    render json: cart.cart_items.includes(:product).map { |item| 
+    render json: cart.cart_items.includes(:product).map { |item|
       {
         id: item.id,
         product: {

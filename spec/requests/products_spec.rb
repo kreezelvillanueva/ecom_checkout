@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "Products API", type: :request do
   describe "GET /products" do
@@ -15,12 +17,12 @@ RSpec.describe "Products API", type: :request do
 
   describe "POST /products" do
     let(:valid_file) { fixture_file_upload("products.json", "application/json") }
-  
+
     it "uploads products successfully" do
       post products_path, params: { file: valid_file }
-  
+
       expect(response).to have_http_status(:ok)
-      json_response = JSON.parse(response.body)
+      json_response = response.parsed_body
       expect(json_response["message"]).to eq("Products uploaded successfully!")
     end
 

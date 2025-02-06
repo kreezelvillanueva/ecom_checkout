@@ -1,5 +1,7 @@
-class ProductsController < ApplicationController
+# frozen_string_literal: true
 
+# This is the controller for the products
+class ProductsController < ApplicationController
   def index
     @products = Product.all
     respond_to do |format|
@@ -19,7 +21,7 @@ class ProductsController < ApplicationController
         end
       end
 
-      render json: { message: "Products uploaded successfully!" }, status: :ok  # ✅ Return JSON
+      render json: { message: "Products uploaded successfully!" }, status: :ok # ✅ Return JSON
     else
       render json: { error: "No file provided" }, status: :unprocessable_entity
     end

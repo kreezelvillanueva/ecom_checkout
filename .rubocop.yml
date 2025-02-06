@@ -1,0 +1,56 @@
+require: rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 3.3.0
+  NewCops: enable
+  SuggestExtensions: false
+  Include:
+    - Rakefile
+    - config.ru
+    - lib/**/*.rake
+    - /**/*.rb
+  Exclude:
+    - test/*
+    - db/schema.rb
+    - bin/*
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 30.0
+
+Metrics/BlockLength:
+  Exclude:
+    - "**/*_spec.rb"
+    - "config/**/*.rb"
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 15
+  Enabled: false
+
+Metrics/ModuleLength:
+  Exclude:
+    - "**/*_spec.rb"
+
+Naming/FileName:
+  Exclude:
+    - Gemfile
+    - Capfile
+
+Rails/OutputSafety:
+  Exclude:
+    - app/views/kaminari/*
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Style/SymbolArray:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
